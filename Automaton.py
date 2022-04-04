@@ -3,22 +3,23 @@ from Symbols import Symbols
 from Error import Error
 
 class Automaton:
+    keywords = ['if', 'then', 'else', 'for', 'while', 'do', 'return', 'int', 'float', 'string', 'char', 'void', 'main()']
 
     ## Check if input is a number
     def is_number(self, input):
-        return input.isDigit()
+        return input.isdigit()
 
     ## Check if input is all alphabet characters
     def is_char(self, input):
         return input.isalpha()
 
-    def float_identifier(self, line, line_number):
+    def num_identifier(self, line, line_number):
         length = len(line)
         is_float = False
         error = False
 
         for i in range(2, length):
-            if (not is_number(line[i])):
+            if (not self.is_number(line[i])):
                 if (line[i] != '.'):
                     Error.add_error(line_number)
                     error = True
@@ -44,17 +45,19 @@ class Automaton:
 
     ## Identify number
     def number_identifier(self, line, line_number):
+        print("Number identifier")
         if (self.is_number(line[1])):
             if len(line) == 2:
                 Output.set_int_identifier(line_number, line)
                 Symbols.add_symbol(line)
             else:
-                self.float_identifier(line, line_number)
+                self.num_identifier(line, line_number)
         else:
             Error.add_error(line_number)
 
     ## Identify underline
     def underline_identifier1(self, line, line_number):
+        print("Underline identifier")
         length = len(line)
 
         if (self.is_char(line[1]) or self.is_number(line[1])):
@@ -80,10 +83,11 @@ class Automaton:
 
     ## Identify integer
     def int_identifier(self, line, line_number):
+        print("Int identifier")
         length = len(line)
         error = False
 
-        if (length <= 3):
+        if (length <= 5):
             for i in range(1, length):
                 if i == 1:
                     if line[i] == 'n':
@@ -111,7 +115,8 @@ class Automaton:
             Output.set_int(line_number)
 
     ## Identify float
-    def charIdentifier(self, line, line_number):
+    def float_Identifier(self, line, line_number):
+        print('Float_Identifier')
         length = len(line)
         error = False
 
@@ -154,6 +159,7 @@ class Automaton:
 
     ## Identify char
     def char_identifier(self, line, line_number):
+        print("Char identifier")
         length = len(line)
         error = False
 
@@ -191,6 +197,7 @@ class Automaton:
 
     ## Identify boolean
     def boolean_identifier(self, line, line_number):
+        print("Boolean identifier")
         length = len(line)
         error = False
 
@@ -244,6 +251,7 @@ class Automaton:
 
     ## Identify comment
     def comment_identifier(self, line, line_number):
+        print("Comment identifier")
         length = len(line)
 
         if line[1] == '*':

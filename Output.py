@@ -5,23 +5,19 @@ class Output:
 
     @staticmethod
     def set_int(line):
-        output[line] = "INT"
+        Output.output[line] = "INT"
 
     @staticmethod
     def set_float(line):
-        output[line] = "FLOAT"
+        Output.output[line] = "FLOAT"
 
     @staticmethod
     def set_string(line):
-        output[line] = "STRING"
+        Output.output[line] = "STRING"
 
     @staticmethod
     def set_boolean(line):
-        output[line] = "BOOLEAN"
-
-    @staticmethod
-    def set_int_identifier(line, value):
-        index = 0
+        Output.output[line] = "BOOLEAN"
 
     @staticmethod
     def set_identifier(line, value):
@@ -29,9 +25,9 @@ class Output:
 
         if (Symbols.get_index_if_exists(line) != 0):
             index = Symbols.get_index_if_exists(line)
-            output[line] = "IDENTIFIER" + index
+            Output.output[line] = "IDENTIFIER {}".format(index)
         else:
-            output[line] = "IDENTIFIER" + Symbols.get_index_of_identifier(value)
+            Output.output[line] = "IDENTIFIER {}".format(Symbols.get_index_of_identifier(value))
 
     @staticmethod
     def set_int_identifier(line, value):
@@ -39,9 +35,9 @@ class Output:
 
         if (Symbols.get_index_if_exists(line) != 0):
             index = Symbols.get_index_if_exists(line)
-            output[line] = "IDENTIFIER INT" + index
+            Output.output[line] = "IDENTIFIER INT {}".format(index)
         else:
-            output[line] = "IDENTIFIER INT" + Symbols.get_index_of_identifier(value)
+            Output.output[line] = "IDENTIFIER INT {}".format(Symbols.get_index_of_identifier(value))
 
     @staticmethod
     def set_float_identifier(line, value):
@@ -49,14 +45,14 @@ class Output:
 
         if (Symbols.get_index_if_exists(line) != 0):
             index = Symbols.get_index_if_exists(line)
-            output[line] = "IDENTIFIER FLOAT" + index
+            Output.output[line] = "IDENTIFIER FLOAT {}".format(index)
         else:
-            output[line] = "IDENTIFIER FLOAT" + Symbols.get_index_of_identifier(value)
+            Output.output[line] = "IDENTIFIER FLOAT {}".format(Symbols.get_index_of_identifier(value))
 
     @staticmethod
     def set_comment_identifier(line, value):
-        output[line] = "COMMENT"
+        Output.output[line] = "COMMENT"
 
     @staticmethod
     def get_output():
-        return output
+        return Output.output

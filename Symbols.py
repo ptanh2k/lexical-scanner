@@ -19,7 +19,7 @@ class Symbols:
 
         for i in range(0, length):
             if (line == Symbols.symbols[i]):
-                return i+1
+                return i + 1
         
         return 0
 

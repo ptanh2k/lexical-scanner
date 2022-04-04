@@ -1,14 +1,19 @@
+from Automaton import Automaton
 class LexicalScanner:
-    def tokenizer(self, lines):
-        tokens = []
+    automaton = Automaton()
 
-        keywords = ['if', 'then', 'else', 'for', 'while', 'do', 'return']
+    def tokenizer(self, lines):
+
+        line = None
+
+        line_number = 1
 
         for line in lines:
-            if (len(line) > 0):
-                if (line[0] == '/' and line[1] == '/'):
-                    continue
-                else:
-                    print(line)
+            if (len(line.strip()) != 0):
+                self.automaton.identify_character(line.strip(), line_number)
+                line_number += 1
             else:
                 continue
+
+
+        
