@@ -9,8 +9,8 @@ class LexicalScanner:
         line_number = 1
 
         for line in lines:
-            if (len(line.strip()) != 0):
-                self.automaton.identify_character(line.strip(), line_number)
+            if (len(line) != 0):
+                self.automaton.identify_character(line, line_number)
                 line_number += 1
             else:
                 continue

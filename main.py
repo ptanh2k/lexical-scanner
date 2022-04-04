@@ -96,16 +96,16 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    code = read_file(args.path)    
+    code = read_file(args.path)
 
-    print(code)
+    print(code)    
 
     scanner = LexicalScanner()
 
-    # scanner.tokenizer(code)
+    scanner.tokenizer(code)
 
-    # print_identifier()
-    # print_symbols()
-    # print_error()
+    print_identifier()
+    print_symbols()
+    print_error()
 
     
