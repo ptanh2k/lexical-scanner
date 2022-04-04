@@ -1,11 +1,15 @@
 import argparse
 
-from LexicalScanner import LexicalScanner
-# from FileReader import FileReader
+from Automaton import Automaton
+from Error import Error
+from Symbols import Symbols
+from Output import Output
 
-def readFile(path):
+def read_file(path):
     with open(path, "r") as reader:
-        print(reader.read())
+        lines = [line.strip() for line in reader]
+
+    return lines
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -13,4 +17,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    readFile(path=args.path)
+    code = read_file(args.path)
+
+    scanner = Automaton()
+
+    scanner.tokenizer(code)
