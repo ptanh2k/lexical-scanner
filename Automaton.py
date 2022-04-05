@@ -23,10 +23,6 @@ class Automaton:
         except ValueError:
             return False
 
-    ## Check if input is all alphabet characters
-    def is_char(self, input):
-        return input.isalpha()
-
     ## Check if input is a operator
     def is_operator(self, input):
         return (input in self.operators)
@@ -34,6 +30,10 @@ class Automaton:
     ## Check if input is a separator
     def is_separator(self, input):
         return (input in self.separators)
+
+    ## Check if input is all alphabet characters
+    def is_var(self, input):
+        return (not self.is_keyword(input) and not self.is_integer(input) and not self.is_float(input) and not self.is_separator(input) and not self.is_operator(input))
 
     def float_literal(self, line, line_number):
         print("Float literal")
@@ -86,6 +86,12 @@ class Automaton:
         Output.set_separator_identifier(line_number, line)
         Symbols.add_symbol(line)
 
+    ## Identify variable name
+    def var_identifier(self, line, line_number):
+        print("Variable identifier")
+        Output.set_var_identifier(line_number, line)
+        Symbols.add_symbol(line)
+
     ## Identify underline
     def underline_identifier1(self, line, line_number):
         print("Underline identifier")
@@ -133,4 +139,4 @@ class Automaton:
                 elif first_char == '/':
                     self.comment_identifier(line, line_number)
                 else:
-                    Error.add_error(line_number)
+                    self.var_identifier(line, line_number)

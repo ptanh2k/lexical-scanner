@@ -1,7 +1,5 @@
 23
 
-int b = "Beef steak"
-
 int main()
 {
   // 2 variables yoyo

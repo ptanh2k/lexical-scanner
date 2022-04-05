@@ -78,5 +78,16 @@ class Output:
             Output.output[line] = "IDENTIFIER SEPARATOR {}".format(Symbols.get_index_of_identifier(value))
 
     @staticmethod
+    def set_var_identifier(line, value):
+        index = 0
+
+        if (Symbols.get_index_if_exists(line) != 0):
+            index = Symbols.get_index_if_exists(line)
+            Output.output[line] = "IDENTIFIER VARIABLE {}".format(index)
+        else:
+            Output.output[line] = "IDENTIFIER VARIABLE {}".format(Symbols.get_index_of_identifier(value))
+
+
+    @staticmethod
     def get_output():
         return Output.output
