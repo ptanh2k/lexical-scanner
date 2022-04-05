@@ -106,6 +106,6 @@ if __name__ == "__main__":
 
     print_identifier()
     print_symbols()
-    print_error()
+    # print_error()
 
     

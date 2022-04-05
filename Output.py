@@ -58,5 +58,25 @@ class Output:
         Output.output[line] = "COMMENT"
 
     @staticmethod
+    def set_operator_identifier(line, value):
+        index = 0
+
+        if (Symbols.get_index_if_exists(line) != 0):
+            index = Symbols.get_index_if_exists(line)
+            Output.output[line] = "IDENTIFIER OPERATOR {}".format(index)
+        else:
+            Output.output[line] = "IDENTIFIER OPERATOR {}".format(Symbols.get_index_of_identifier(value))
+
+    @staticmethod
+    def set_separator_identifier(line, value):
+        index = 0
+
+        if (Symbols.get_index_if_exists(line) != 0):
+            index = Symbols.get_index_if_exists(line)
+            Output.output[line] = "IDENTIFIER SEPARATOR {}".format(index)
+        else:
+            Output.output[line] = "IDENTIFIER SEPARATOR {}".format(Symbols.get_index_of_identifier(value))
+
+    @staticmethod
     def get_output():
         return Output.output

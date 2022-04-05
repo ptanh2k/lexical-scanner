@@ -4,6 +4,8 @@ from Error import Error
 
 class Automaton:
     keywords = ['if', 'then', 'else', 'for', 'while', 'do', 'return', 'int', 'float', 'boolean', 'string', 'void', 'main()']
+    operators = ['+', '-', '%', '/', '=', '>', '<', '>=', '<=', '&&', '||', '==']
+    separators = [',', ';', '(', ')', '{', '}', '[', ']']
 
     ## Check if input is a keyword
     def is_keyword(self, input):
@@ -25,7 +27,15 @@ class Automaton:
     def is_char(self, input):
         return input.isalpha()
 
-    def float_identifier(self, line, line_number):
+    ## Check if input is a operator
+    def is_operator(self, input):
+        return (input in self.operators)
+
+    ## Check if input is a separator
+    def is_separator(self, input):
+        return (input in self.separators)
+
+    def float_literal(self, line, line_number):
         print("Float literal")
         if (self.is_float(line)):
             Output.set_float_literal(line_number, line)
@@ -44,6 +54,7 @@ class Automaton:
 
     ## Identify keywords
     def keyword_identifier(self, line, line_number):
+        print("Keyword identifier")
         Symbols.add_symbol(line)
         Output.set_keyword(line_number)
 
@@ -52,7 +63,7 @@ class Automaton:
         print("Comment identifier")
         length = len(line)
 
-        if line[1] == '*':
+        if line[1] == '*' or line[1] == '/':
             if line[length - 2] != '*':
                 Error.add_error(line_number)
             else:
@@ -62,6 +73,18 @@ class Automaton:
                     Output.set_comment_identifier(line_number)
         else:
             Error.add_error(line_number)
+
+    ## Identify operators
+    def operator_identifier(self, line, line_number):
+        print("Operator identifier")
+        Output.set_operator_identifier(line_number, line)
+        Symbols.add_symbol(line)
+
+    ## Identify separators
+    def separator_identifier(self, line, line_number):
+        print("Separator identifier")
+        Output.set_separator_identifier(line_number, line)
+        Symbols.add_symbol(line)
 
     ## Identify underline
     def underline_identifier1(self, line, line_number):
@@ -98,10 +121,16 @@ class Automaton:
                 self.int_literal(line, line_number)
             elif (self.is_float(line)):
                 self.float_literal(line, line_number)
+            elif (self.is_operator(line)):
+                self.operator_identifier(line, line_number)
+            elif (self.is_separator(line)):
+                self.separator_identifier(line, line_number)
             else:
                 first_char = line[0]
                 
                 if first_char == '_':
                     self.underline_identifier1(line, line_number)
+                elif first_char == '/':
+                    self.comment_identifier(line, line_number)
                 else:
                     Error.add_error(line_number)

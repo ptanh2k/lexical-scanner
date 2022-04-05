@@ -1,6 +1,6 @@
 23
 
-int b;
+int b = "Beef steak"
 
 int main()
 {
