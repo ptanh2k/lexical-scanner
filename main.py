@@ -46,6 +46,11 @@ def read_file(path):
             x = x + 1
     return ar
 
+def word_output(arr):
+    with open('output.vctok', 'w') as f:
+        for i in range(len(arr)):
+            f.write(str(arr[i]) + '\n')
+
 def print_identifier():
     print("Identifier: ")
     identifiers = dict()
@@ -89,7 +94,6 @@ def print_symbols():
             print("{} ".format(i+1) + symbol)
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", "-i", type=str, help="File to analyze")
@@ -97,6 +101,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     code = read_file(args.path)
+
+    word_output(code)
 
     print(code)    
 
