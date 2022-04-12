@@ -51,8 +51,14 @@ def word_output(arr):
         for i in range(len(arr)):
             f.write(str(arr[i]) + '\n')
 
+def word_id_output(words, ids):
+    with open('output_word_id.vctok', 'w') as f:
+        for i in range(len(words)):
+            f.write(str(words[i]) + 4*'\t' + str(ids[i]) + '\n')
+
 def print_identifier():
     print("Identifier: ")
+    output = []
     identifiers = dict()
     identifiers = Output.get_output()
     indexes = [key for key in identifiers.keys()]
@@ -65,6 +71,9 @@ def print_identifier():
 
             if identifier is not None:
                 print("[ {} ]".format(index) + identifier)
+                output.append("[ {} ]".format(index) + identifier)
+
+    return output
 
 def print_error():
     print("Error: ")
@@ -85,6 +94,7 @@ def print_error():
 def print_symbols():
     print("Symbols: ")
     symbols = []
+    output = []
     symbols = Symbols.get_symbols()
     length = len(symbols)
 
@@ -92,6 +102,9 @@ def print_symbols():
         for i in range(0, length):
             symbol = symbols[i]
             print("{} ".format(i+1) + symbol)
+            output.append("{} ".format(i+1) + symbol)
+
+    return output
 
 
 if __name__ == "__main__":
@@ -102,16 +115,17 @@ if __name__ == "__main__":
 
     code = read_file(args.path)
 
-    word_output(code)
-
-    print(code)    
-
     scanner = LexicalScanner()
 
     scanner.tokenizer(code)
 
-    print_identifier()
-    print_symbols()
+    output_id = print_identifier()
+    output_sym = print_symbols()
     # print_error()
+
+    word_output(code)
+
+    word_id_output(output_sym, output_id)
+
 
     

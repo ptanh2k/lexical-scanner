@@ -36,7 +36,6 @@ class Automaton:
         return (not self.is_keyword(input) and not self.is_integer(input) and not self.is_float(input) and not self.is_separator(input) and not self.is_operator(input))
 
     def float_literal(self, line, line_number):
-        print("Float literal")
         if (self.is_float(line)):
             Output.set_float_literal(line_number, line)
             Symbols.add_symbol(line)
@@ -45,7 +44,6 @@ class Automaton:
 
     ## Identify number
     def int_literal(self, line, line_number):
-        print("Int literal")
         if (self.is_integer(line)):
             Output.set_int_literal(line_number, line)
             Symbols.add_symbol(line)
@@ -54,13 +52,11 @@ class Automaton:
 
     ## Identify keywords
     def keyword_identifier(self, line, line_number):
-        print("Keyword identifier")
         Symbols.add_symbol(line)
         Output.set_keyword(line_number)
 
     ## Identify comment
     def comment_identifier(self, line, line_number):
-        print("Comment identifier")
         length = len(line)
 
         if line[1] == '*' or line[1] == '/':
@@ -76,25 +72,21 @@ class Automaton:
 
     ## Identify operators
     def operator_identifier(self, line, line_number):
-        print("Operator identifier")
         Output.set_operator_identifier(line_number, line)
         Symbols.add_symbol(line)
 
     ## Identify separators
     def separator_identifier(self, line, line_number):
-        print("Separator identifier")
         Output.set_separator_identifier(line_number, line)
         Symbols.add_symbol(line)
 
     ## Identify variable name
     def var_identifier(self, line, line_number):
-        print("Variable identifier")
         Output.set_var_identifier(line_number, line)
         Symbols.add_symbol(line)
 
     ## Identify underline
     def underline_identifier1(self, line, line_number):
-        print("Underline identifier")
         length = len(line)
 
         if (self.is_char(line[1]) or self.is_number(line[1])):
