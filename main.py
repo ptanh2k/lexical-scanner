@@ -113,19 +113,21 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    code = read_file(args.path)
+    if args.path.endswith(".vc"):
+        code = read_file(args.path)
+        scanner = LexicalScanner()
 
-    scanner = LexicalScanner()
+        scanner.tokenizer(code)
 
-    scanner.tokenizer(code)
+        output_id = print_identifier()
+        output_sym = print_symbols()
+        # print_error()
 
-    output_id = print_identifier()
-    output_sym = print_symbols()
-    # print_error()
+        word_output(code)
 
-    word_output(code)
-
-    word_id_output(output_sym, output_id)
+        word_id_output(output_sym, output_id)
+    else:
+        print("Error: File must end with .vc")
 
 
     
